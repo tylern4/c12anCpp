@@ -1,9 +1,11 @@
 #include <iostream>
 #include "algorithm.h"
 #include "protoParticleReader.h"
+#include "particleMaker.h"
 #include "hipoReader.h"
 #include "manager.h"
 #include <vector>
+#include <unordered_map>
 
 using namespace std;
 
@@ -17,8 +19,23 @@ class test : public core::algorithm {
 };
 
 void test::processEvent(){
-  vector<hipoBase::protoParticle> *v = (vector<hipoBase::protoParticle>*)(getObject("protoParticles"));
-  if( ! v ) return;
+  unordered_map<int,vector<hipoBase::protoParticle>> *map = (unordered_map<int,vector<hipoBase::protoParticle>>*)(getObject("particles"));
+  if( ! map ) return;
+
+  if( map->find(11) == map->end() ){
+    return;
+  }
+  else {
+    cout << " found electrons! " << endl;
+    for( auto p : (*map)[11]){
+      cout << " patricle: " 
+        << p.id <<" "
+        << p.pid <<" "
+        << p.charge <<" "
+        << p.beta << endl;
+
+    }
+  }
 
   //cout << " ++++ new event " << v->size() << endl;
   //for( hipoBase::protoParticle p : (*v) ){
@@ -34,14 +51,16 @@ int main() {
 
   core::manager *M = core::manager::instance();
 
-  hipoBase::hipoReader reader( "/home/fbossu/Data/Analysis/RG-A/E10.6/skim8/4070_8.hipo");
+  hipoBase::hipoReader reader( "/home/bossu/Data/4020_8.hipo");
   reader.open();
   M->addDataReader( &reader );
 
   hipoBase::protoParticleReader pr;
+  hipoBase::particleMaker pm;
   test ta;
 
   M->addAlgorithm( &pr );
+  M->addAlgorithm( &pm );
   M->addAlgorithm( &ta );
 
   M->run();
