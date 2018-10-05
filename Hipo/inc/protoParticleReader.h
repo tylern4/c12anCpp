@@ -1,23 +1,8 @@
 #include "algorithm.h"
 #include "node.h"
+#include "protoParticle.h"
 
 namespace hipoBase {
-
-  class protoParticle {
-    public:
-      int id;
-      float beta;
-      int charge;
-      float chi2pid;
-      int pid;
-      float px;
-      float py;
-      float pz;
-      int status;
-      float vx;
-      float vy;
-      float vz;
-  };
 
   class protoParticleReader : public core::algorithm {
     public:
