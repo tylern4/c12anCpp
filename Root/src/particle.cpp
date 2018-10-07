@@ -5,6 +5,8 @@
 
 using namespace root;
 
+ClassImp(particle)
+
 particle* particle::getParticle( int pid, float px, float py, float pz){
 
   float m = TDatabasePDG::Instance()->GetParticle(pid)->Mass();

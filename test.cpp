@@ -1,11 +1,16 @@
 #include <iostream>
 #include "algorithm.h"
 #include "protoParticleReader.h"
-#include "particleMaker.h"
+#include "tparticleMaker.h"
 #include "hipoReader.h"
 #include "manager.h"
 #include <vector>
-#include <unordered_map>
+//#include <unordered_map>
+#include <map>
+#include "particle.h"
+using namespace root;
+
+#include "TClonesArray.h"
 
 using namespace std;
 
@@ -19,20 +24,21 @@ class test : public core::algorithm {
 };
 
 void test::processEvent(){
-  unordered_map<int,vector<hipoBase::protoParticle>> *map = (unordered_map<int,vector<hipoBase::protoParticle>>*)(getObject("particles"));
-  if( ! map ) return;
+  //unordered_map<int,vector<hipoBase::protoParticle>> *map = (unordered_map<int,vector<hipoBase::protoParticle>>*)(getObject("particles"));
+  map<int,TClonesArray*> *particles = (map<int,TClonesArray*>*)getObject("particles");
+  if( ! particles ) return;
 
-  if( map->find(11) == map->end() ){
+  if( particles->find(11) == particles->end() ){
     return;
   }
   else {
     cout << " found electrons! " << endl;
-    for( auto p : (*map)[11]){
+    TClonesArray *electrons = (*particles)[11];
+    for( int i=0;i<electrons->GetSize(); i++){
+      //for( auto p : (*particles)[11]){
       cout << " patricle: " 
-        << p.id <<" "
-        << p.pid <<" "
-        << p.charge <<" "
-        << p.beta << endl;
+        << ((particle*)electrons->At(i))->pid <<" "
+        << ((particle*)electrons->At(i))->P() << endl;
 
     }
   }
@@ -56,7 +62,7 @@ int main() {
   M->addDataReader( &reader );
 
   hipoBase::protoParticleReader pr;
-  hipoBase::particleMaker pm;
+  root::tparticleMaker pm;
   test ta;
 
   M->addAlgorithm( &pr );

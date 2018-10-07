@@ -3,7 +3,9 @@
 
 #include "algorithm.h"
 
-#include "TMap.h"
+#include <map>
+
+class TClonesArray;
 
 namespace root {
 
@@ -15,7 +17,7 @@ namespace root {
       virtual void terminate() {} 
 
     private:
-      TMap *particles;
+      std::map<int,TClonesArray*> *particles;
 
   };
 };
