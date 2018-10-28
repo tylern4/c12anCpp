@@ -28,3 +28,6 @@
 #scons
 .scon*
 *.log
+
+# temp
+*.swp
