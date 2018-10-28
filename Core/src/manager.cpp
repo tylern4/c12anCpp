@@ -1,9 +1,11 @@
 #include "manager.h"
 #include <iostream>
+#include <memory>
 using namespace std;
 using namespace core;
 
 manager::manager() {
+  cout << " +++++++++++++++++++++++++++++\n";
   _obj = new objContainer();
   _alg = new algContainer();
 }
@@ -21,15 +23,18 @@ void manager::addAlgorithm( algorithm *a ){
 
 
 void manager::run() {
-  void *ev = 0x0;
+ cout << " ======================  RUN " << endl; 
+ //void *ev = 0x0;
   for( auto alg : (*_alg) ){  alg->init() ;}
-  while( (ev = _reader->next()) ){
-    (*_obj)["Event"] = ev;
+  while( _reader->next() ){
+    //cout << " next " << endl;
+    //(*_obj)["Event"] = std::make_unique<ev>();
+    //cout << (*_alg).size() << "  ... " << endl;
     for( auto alg : (*_alg) ){ alg->processEvent(); }
 
     // TODO clean objects
     //for( auto o : (*_obj) ) { if( o.second != NULL ){ cout << o.first << endl;  delete (o.second); } }
-    //_obj->clear();
+    _obj->clear();
   }
 
   // at the end of the loop on events call terminate

@@ -1,10 +1,13 @@
 #ifndef PROTOPARTICLE_H
 #define PROTOPARTICLE_H
 
+#include "object.h"
+
 namespace hipoBase {
 
-  class protoParticle {
+  class protoParticle : public core::object {
     public:
+      virtual ~protoParticle() {}
       int id;
       float beta;
       int charge;

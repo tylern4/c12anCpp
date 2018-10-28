@@ -12,6 +12,7 @@ namespace core {
       using std::vector<algorithm*>::push_back;
       using std::vector<algorithm*>::begin;
       using std::vector<algorithm*>::end;
+      using std::vector<algorithm*>::size;
 
     private:
       static algContainer* _algCont;

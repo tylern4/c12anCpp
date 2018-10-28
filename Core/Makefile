@@ -6,7 +6,7 @@ OBJDIR := build
 SOURCES := $(wildcard $(SRCDIR)/*.cpp)
 OBJECTS := $(SOURCES:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 
-CFLAGS  := -Wall -O2 -fPIC -std=c++11
+CFLAGS  := -Wall -O2 -fPIC -std=c++14
 
 BUILD := $(shell mkdir -p build)
 

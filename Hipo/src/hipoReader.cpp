@@ -15,8 +15,10 @@ void hipoReader::close(){
   //_reader->close();
 }
 
+//#include <iostream>
 void* hipoReader::next() {
-   if( _reader->next() == false ) return NULL;
+  //std::cout << " hiporeader next " << std::endl;
+  if( _reader->next() == false ) return NULL;
   return _reader;
 }
 

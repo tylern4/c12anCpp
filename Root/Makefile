@@ -15,11 +15,11 @@ ROOT := $(shell root-config --cflags) $(shell root-config --libs)
 SOURCES := $(wildcard $(SRCDIR)/*.cpp)
 OBJECTS := $(SOURCES:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 
-CFLAGS  := -Wall -O2 -fPIC -std=c++11
+CFLAGS  := -Wall -O2 -fPIC -std=c++14
 
 BUILD := $(shell mkdir -p build)
 
-CFLAGS := $(CFLAGS) $(ROOT)
+CFLAGS := $(ROOT) $(CFLAGS)
 
 INCLUDES := -I$(INCCORE) -I$(INCHipo)
 LIBS := -L$(LIBCORE) -L$(LIBHipo)
@@ -32,4 +32,4 @@ $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.cpp
 	$(CXX) $(CFLAGS) -I$(INCDIR)  $(INCLUDES) $(LIBS) -c $< -o $@
 
 clean:
-	rm build/*; rm libfoo.so; rm -rf build
+	rm build/*; rm libtestRoot.so; rm -rf build

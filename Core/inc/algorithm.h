@@ -4,6 +4,10 @@
 #include "objContainer.h"
 #include "dataReader.h"
 
+#include <string>
+#include <memory>
+#include "object.h"
+
 namespace core {
   
   class algorithm {
@@ -17,8 +21,9 @@ namespace core {
       virtual void processEvent() = 0;
       virtual void terminate() = 0;
 
-      virtual void bookObject( const char*, void*);
-      virtual void* getObject( const char*  );
+      virtual void bookObject( std::string, std::shared_ptr<object>);
+      /*virtual void bookObject( std::string, std::unique_ptr<object>);*/
+      virtual void* getObject( std::string  );
       
       
     private:
