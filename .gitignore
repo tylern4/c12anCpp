@@ -31,3 +31,6 @@
 
 # temp
 *.swp
+
+# cmake
+build
