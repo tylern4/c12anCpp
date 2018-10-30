@@ -33,8 +33,8 @@ set(CMAKE_MODULE_PATH
    ${PROJECT_SOURCE_DIR}/cmake)
 
 
-link_directories($ENV{HIPO}/lib)
-include_directories(Core Hip Roo Core/inc Hipo/inc Root/inc $ENV{HIPO}/Hipo)
+link_directories($ENV{HIPO_TOOLS}/lib)
+include_directories(Core Hip Roo Core/inc Hipo/inc Root/inc $ENV{HIPO_TOOLS}/include/hipo)
 add_subdirectory(Core)
 add_subdirectory(Hipo)
 add_subdirectory(Root)

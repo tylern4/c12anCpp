@@ -7,3 +7,5 @@ add_library(hipoBase SHARED
   src/hipoReader.cpp
   src/protoParticleReader.cpp
   )
+
+target_link_libraries(hipoBase c12Core hipocpp)

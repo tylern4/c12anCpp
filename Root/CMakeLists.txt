@@ -7,4 +7,4 @@ add_library(testRoot SHARED
   src/particle.cpp
   src/particleMaker.cpp
   )
-target_link_libraries(testRoot ${ROOT_LIBRARIES})
+target_link_libraries(testRoot ${ROOT_LIBRARIES} c12Core)
